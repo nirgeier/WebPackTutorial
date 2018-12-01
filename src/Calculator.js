@@ -1,13 +1,12 @@
-/**
- * This is our sample application code.
- */
-let Calculator = {};
-
 // Add the required "modules"
-Calculator.add = require('./CalculatorAdd');
-Calculator.min = require('./CalculatorSubstract');
-Calculator.div = require('./CalculatorDivide');
-Calculator.mul = require('./CalculatorMultiply');
+import add from './CalculatorAdd';
+import sub from './CalculatorSubstract';
+import div from './CalculatorDivide';
+import mul from './CalculatorMultiply';
 
-// Export the Calculator
-module.exports = Calculator;
+export default {
+  add: add,
+  sub: sub,
+  div: div,
+  mul: mul
+};

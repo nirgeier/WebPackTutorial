@@ -145,3 +145,132 @@ Entrypoint main = bundle.js
 [3] ./src/CalculatorDivide.js 169 bytes {0} [built]
 [4] ./src/CalculatorMultiply.js 171 bytes {0} [built]
 ```
+
+## Step03 - Test the code
+- In this step we will add some test code to our application. 
+- We wish to use karma as our testing framework and instanbul for our test coverage.
+- To make it more interesting **karma** and **instanbul** does not work well with es6 code so to overcome this issue we
+are using **babel** which will convert the es6 code to es5 and it will be testable
+- In order to be able to compile and test copy the following files 
+  - [babel.config.js](./babel.config.js)
+  - [karma.conf.js](./karma.conf.js)
+  - [test/index.js](test/index.js)
+  - [webpack.config.js](webpack.config.js)
+  - [package.json](package.json)
+- To make it more interesting as explained above we will convert our code to ES6 code
+
+- [`src/CalculatorAdd.js`](src/CalculatorAdd.js)
+    ```js
+    export default function () {
+      return Array.prototype.slice.call(arguments)
+        .reduce((sum, number) => sum + number);
+    }
+    ```
+
+- [`src/CalculatorDivide.js`](src/CalculatorDivide.js)
+  ```js
+  export default function () {
+    return Array.prototype.slice.call(arguments)
+      .reduce((sum, number) => sum / number);
+  }
+  ```
+
+- [`src/CalculatorMultiply.js`](src/CalculatorMultiply.js)
+  ```js
+  export default function () {
+    return Array.prototype.slice.call(arguments)
+      .reduce((sum, number) => sum */* number);
+  }
+  ```
+
+- [`src/CalculatorSubstract.js`](src/CalculatorSubstract.js)
+  ```js
+  export default function () {
+    return Array.prototype.slice.call(arguments)
+      .reduce((sum, number) => sum - number);
+  }
+  ```
+
+- [`src/Calculator.js`](src/Calculator.js)
+   ```js
+    import add from './CalculatorAdd';
+    import sub from './CalculatorSubstract';
+    import div from './CalculatorDivide';
+    import mul from './CalculatorMultiply';
+
+    export default {
+      add: add,
+      sub: sub,
+      div: div,
+      mul: mul
+    };
+    ```
+- Lets install the dependencies for this step
+  ```
+  # run npm i to install all the requirements
+  npm i 
+  ```
+- Run the tests  
+  ```
+  # execute the tests
+  npm run test
+  ```
+- This should be the output
+  ```
+  START:
+  Version: webpack 4.27.1
+  Time: 11248ms
+  Built at: 2018-12-10 01:08:41
+                          Asset      Size               Chunks             Chunk Names
+                    main.min.js  6.22 KiB     0, 1, 2, 3, 4, 5  [emitted]  main
+          src\Calculator.min.js  6.22 KiB     1, 0, 2, 3, 4, 5  [emitted]  src\Calculator
+        src\CalculatorAdd.min.js  2.07 KiB                    2  [emitted]  src\CalculatorAdd
+    src\CalculatorDivide.min.js  2.07 KiB                    3  [emitted]  src\CalculatorDivide
+  src\CalculatorMultiply.min.js  2.08 KiB                    4  [emitted]  src\CalculatorMultiply
+  src\CalculatorSubstract.min.js  2.08 KiB                    5  [emitted]  src\CalculatorSubstract
+              test\index.min.js  74.9 KiB  6, 0, 1, 2, 3, 4, 5  [emitted]  test\index
+  Entrypoint main = main.min.js
+  Entrypoint src\Calculator = src\Calculator.min.js
+  Entrypoint src\CalculatorSubstract = src\CalculatorSubstract.min.js
+  Entrypoint src\CalculatorMultiply = src\CalculatorMultiply.min.js
+  Entrypoint src\CalculatorDivide = src\CalculatorDivide.min.js
+  Entrypoint src\CalculatorAdd = src\CalculatorAdd.min.js
+  Entrypoint test\index = test\index.min.js
+  [0] ./src/Calculator.js 2.12 KiB {0} {1} {6} [built]
+  [1] ./src/CalculatorAdd.js 2.63 KiB {0} {1} {2} {6} [built]
+  [2] ./src/CalculatorSubstract.js 2.64 KiB {0} {1} {5} {6} [built]
+  [3] ./src/CalculatorDivide.js 2.63 KiB {0} {1} {3} {6} [built]
+  [4] ./src/CalculatorMultiply.js 2.63 KiB {0} {1} {4} {6} [built]
+  ...
+  [built]
+  10 12 2018 01:08:41.437:INFO [karma-server]: Karma v3.1.3 server started at http://0.0.0.0:9876/
+  10 12 2018 01:08:41.440:INFO [launcher]: Launching browsers Chrome with concurrency unlimited
+  10 12 2018 01:08:41.445:INFO [launcher]: Starting browser Chrome
+  10 12 2018 01:08:43.123:INFO [Chrome 71.0.3578 (Windows 10.0.0)]: 
+
+    Test Calculator
+      Test add
+        √ Add 2 Numbers
+        √ Add 2 Strings
+      Test Substract
+        √ Substract 2 Numbers
+        √ Substract 2 Strings
+      Test Multiply
+        √ Multiply 2 Numbers
+        √ Multiply 2 Strings
+      Test Divide
+        √ Divide 2 Numbers
+        √ Divide 2 Strings
+
+  Finished in 0.012 secs / 0.001 secs @ 01:08:43 GMT+0200 (GMT+02:00)
+
+  SUMMARY:
+  √ 8 tests completed
+
+  ============== Coverage summary ==============
+  Statements   : 100% ( 8/8 )
+  Branches     : 100% ( 0/0 )
+  Functions    : 100% ( 8/8 )
+  Lines        : 100% ( 8/8 )
+  ==============================================
+  ```
