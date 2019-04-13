@@ -1,0 +1,28 @@
+{
+  "name": "WebPackTutorial",
+  "version": "1.0.0",
+  "description": "This tutorial will guide you through the proces of learning WebPack",
+  "main": "src/Calculator.js",
+  "scripts": {
+    "test": "karma start --single-run --no-auto-watch",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nirgeier/WebPackTutorial.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nirgeier/WebPackTutorial/issues"
+  },
+  "homepage": "https://github.com/nirgeier/WebPackTutorial#readme",
+  "dependencies": {
+    "nodemon": "^1.18.4",
+    "webpack": "^4.30.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.0"
+  }
+}
